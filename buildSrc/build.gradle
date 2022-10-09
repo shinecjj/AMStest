@@ -1,0 +1,38 @@
+plugins{
+    //使用 java groovy 插件
+    id 'java'
+    id 'groovy'
+}
+
+group 'com.julive.sam'
+version '0.0.1'
+
+sourceCompatibility = 1.8
+
+repositories{
+    //使用阿里云的maven代理
+    maven { url 'https://maven.aliyun.com/repository/google' }
+    maven { url 'https://maven.aliyun.com/repository/public' }
+//    maven {
+//        url 'http://maven.aliyun.com/nexus/content/groups/public/'
+//    }
+//    maven {
+//        url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'
+//    }
+}
+
+def asmVersion = '8.0.1'
+
+dependencies {
+    //引入gradle api
+    implementation gradleApi()
+    implementation localGroovy()
+    //引入android studio扩展gradle的相关api
+    implementation "com.android.tools.build:gradle:4.1.0"
+    //引入apache io
+    implementation 'org.apache.directory.studio:org.apache.commons.io:2.4'
+    //引入ASM相关api，这是我们插桩的关键，要靠他实现方法插桩
+    implementation "org.ow2.asm:asm:$asmVersion"
+    implementation "org.ow2.asm:asm-util:$asmVersion"
+    implementation "org.ow2.asm:asm-commons:$asmVersion"
+}
